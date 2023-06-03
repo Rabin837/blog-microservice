@@ -1,0 +1,22 @@
+server:
+  port: 8999
+
+eureka:
+  instance:
+    hostname: localhost
+
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: blog-service
+          uri: lb://blog-service
+          predicates:
+            - Path=/api/v1/blog/**
+        - id: comment-service
+          uri: lb://comment-service
+          predicates:
+            - Path=/api/v1/blogs/**
